@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ติดต่อ | มิวสิค Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="nav-brand">
+          <span class="logo-mark">ม</span>
+          Music.Portfolio
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">หน้าแรก</a></li>
+          <li><a href="profile.html">ประวัติส่วนตัว</a></li>
+          <li><a href="education.html">การศึกษา</a></li>
+          <li><a href="hobby.html">งานอดิเรก</a></li>
+          <li><a href="artists.html">ศิลปินที่ชอบ</a></li>
+          <li><a href="contact.html" class="active">ติดต่อ</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="contact-cta">
+          <h2>สามารถติดต่อฉันได้ที่</h2>
+          <p>ยินดีพูดคุยและแลกเปลี่ยนเรื่องคอมพิวเตอร์และดนตรีเสมอครับ</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card contact-card">
+            <div class="icon-badge">📧</div>
+            <h3>Email</h3>
+            <p>Ammissyourrhhh@gmail.com</p>
+          </div>
+
+          <a href="https://www.instagram.com/mqvzic_/" target="_blank" rel="noopener" class="card contact-card contact-card-link">
+            <div class="icon-badge">📸</div>
+            <h3>Instagram</h3>
+            <p>@mqvzic_</p>
+          </a>
+
+          <div class="card contact-card">
+            <div class="icon-badge">🏫</div>
+            <h3>โรงเรียน</h3>
+            <p>โรงเรียนจอมทอง จังหวัดเชียงใหม่</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-brand">
+            <span class="logo-mark">ม</span>
+            Music.Portfolio
+          </div>
+          <p style="font-size:0.9rem; color:var(--blue-200);">
+            เจตพล อินจุ่มใจ๋ (มิวสิค) — นักเรียนชั้น ม.3/2<br>
+            โรงเรียนจอมทอง จังหวัดเชียงใหม่
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>เมนู</h4>
+          <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="profile.html">ประวัติส่วนตัว</a></li>
+            <li><a href="education.html">การศึกษา</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>เพิ่มเติม</h4>
+          <ul>
+            <li><a href="hobby.html">งานอดิเรก</a></li>
+            <li><a href="artists.html">ศิลปินที่ชอบ</a></li>
+            <li><a href="contact.html">ติดต่อ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2569 เจตพล อินจุ่มใจ๋ (มิวสิค) — ม.3/2</span>
+        <span>โครงงานวิชาคอมพิวเตอร์</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle) {
+      navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    }
+  </script>
+
+  <script>
+    /* Global "mouse click = piano C note" easter egg */
+    (function () {
+      let audioCtx = null;
+      function getCtx() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        return audioCtx;
+      }
+      function playC() {
+        const ctx = getCtx();
+        const now = ctx.currentTime;
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.3, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+        gain.connect(ctx.destination);
+        const osc1 = ctx.createOscillator();
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(261.63, now);
+        osc1.connect(gain);
+        const osc2 = ctx.createOscillator();
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(523.25, now);
+        const gain2 = ctx.createGain();
+        gain2.gain.setValueAtTime(0.1, now);
+        osc2.connect(gain2);
+        gain2.connect(gain);
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + 1.3);
+        osc2.stop(now + 1.3);
+      }
+      document.addEventListener('click', playC);
+    })();
+  </script>
+
+
+  <script>
+    /* Shooting stars — lots of them! */
+    (function () {
+      const layer = document.createElement('div');
+      layer.className = 'meteor-layer';
+      document.body.appendChild(layer);
+
+      function spawnMeteor() {
+        const m = document.createElement('div');
+        m.className = 'meteor';
+        const startX = Math.random() * 90 + 2;   // vw
+        const startY = Math.random() * 70 + 2;   // vh, spread across most of the screen
+        const angle = 12 + Math.random() * 24;   // degrees
+        const duration = 1.0 + Math.random() * 1.1; // seconds
+        m.style.left = startX + 'vw';
+        m.style.top = startY + 'vh';
+        m.style.setProperty('--angle', angle + 'deg');
+        m.style.setProperty('--dur', duration + 's');
+        layer.appendChild(m);
+        setTimeout(() => m.remove(), duration * 1000 + 150);
+      }
+
+      function loop() {
+        const burst = 1 + Math.floor(Math.random() * 3); // 1-3 meteors per burst
+        for (let i = 0; i < burst; i++) {
+          setTimeout(spawnMeteor, Math.random() * 200);
+        }
+        const next = 350 + Math.random() * 450; // frequent: ~0.35s-0.8s between bursts
+        setTimeout(loop, next);
+      }
+      setTimeout(loop, 400);
+    })();
+  </script>
+
+  <script>
+    /* Purple glow trail that follows the mouse/drag */
+    (function () {
+      let lastTime = 0;
+      const minInterval = 20; // ms between spawned glow dots, keeps it smooth but light
+
+      function spawnGlow(x, y) {
+        const dot = document.createElement('div');
+        dot.className = 'cursor-glow';
+        const size = 14 + Math.random() * 12;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.left = x + 'px';
+        dot.style.top = y + 'px';
+        document.body.appendChild(dot);
+        dot.addEventListener('animationend', () => dot.remove());
+        setTimeout(() => dot.remove(), 700);
+      }
+
+      function handleMove(x, y) {
+        const now = performance.now();
+        if (now - lastTime < minInterval) return;
+        lastTime = now;
+        spawnGlow(x, y);
+      }
+
+      document.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+      document.addEventListener('touchmove', (e) => {
+        if (!e.touches || !e.touches.length) return;
+        const t = e.touches[0];
+        handleMove(t.clientX, t.clientY);
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
